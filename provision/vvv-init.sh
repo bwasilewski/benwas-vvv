@@ -66,7 +66,9 @@ fi
 # if not, install it
 if ! $(noroot wp plugin is-installed advanced-custom-fields-pro); then
   echo "Installing Plugin: Advanced Custom Fields Pro..."
-  noroot wp plugin install advanced-custom-fields-pro --activate
+  cd ${VVV_PATH_TO_SITE}/public_html/wp-content/plugins/
+  git clone https://github.com/wp-premium/advanced-custom-fields-pro.git
+  noroot wp plugin activate advanced-custom-fields-pro
 fi
 
 # Check if All In One WP Migration is installed
@@ -76,3 +78,10 @@ if ! $(noroot wp plugin is-installed all-in-one-wp-migration); then
   noroot wp plugin install all-in-one-wp-migration --activate
 fi
 
+# Check if ThemeBase theme is installed
+# If not, install it
+if ! $(noroot wp theme is-installed themebase); then
+  echo "Installing Theme: ThemeBase..."
+  noroot git clone https://github.com/bwasilewski/themebase.git
+  noroot wp theme activate themebase
+fi
