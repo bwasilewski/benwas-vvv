@@ -65,8 +65,8 @@ fi
 # Check if ACF Pro is installed
 # if not, install it
 if ! $(noroot wp plugin is-installed advanced-custom-fields-pro); then
-  echo "Installing Plugin: Advanced Custom Fields Pro..."
   cd ${VVV_PATH_TO_SITE}/public_html/wp-content/plugins/
+  echo "Installing Plugin: Advanced Custom Fields Pro..."
   git clone https://github.com/wp-premium/advanced-custom-fields-pro.git
   noroot wp plugin activate advanced-custom-fields-pro
 fi
@@ -74,14 +74,24 @@ fi
 # Check if All In One WP Migration is installed
 # If not, install it
 if ! $(noroot wp plugin is-installed all-in-one-wp-migration); then
+  cd ${VVV_PATH_TO_SITE}/public_html/wp-content/plugins/
   echo "Installing Plugin: All In One WP Migration..."
   noroot wp plugin install all-in-one-wp-migration --activate
+fi
+
+#Check if Contact Form 7 is installed
+# If not, install it
+if ! $(noroot wp plugin is-installed contact-form-7); then
+  cd ${VVV_PATH_TO_SITE}/public_html/wp-content/plugins/
+  echo "Installing Plugin: Contact Form 7..."
+  noroot wp plugin install --activate contact-form-7
 fi
 
 # Check if ThemeBase theme is installed
 # If not, install it
 if ! $(noroot wp theme is-installed themebase); then
   echo "Installing Theme: ThemeBase..."
+  cd ${VVV_PATH_TO_SITE}/public_html/wp-content/themes/
   noroot git clone https://github.com/bwasilewski/themebase.git
   noroot wp theme activate themebase
 fi
